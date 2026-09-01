@@ -15,24 +15,24 @@ It is built for editorial judgment rather than mechanical shortening — the goa
 
 ## Installation
 
-The skill directory must be named `smart-brevity`. Symlink or copy this repository into your agent's skills directory.
+The skill itself lives in the `smart-brevity/` subdirectory — symlink that, not the repository root, so repository metadata stays out of your skills directory.
 
 **Claude Code**
 
 ```bash
-ln -s "$PWD" ~/.claude/skills/smart-brevity
+ln -s "$PWD/smart-brevity" ~/.claude/skills/smart-brevity
 ```
 
 **Codex**
 
 ```bash
-ln -s "$PWD" ~/.codex/skills/smart-brevity
+ln -s "$PWD/smart-brevity" ~/.codex/skills/smart-brevity
 ```
 
 **Both at once** — Codex, Copilot CLI, and Gemini CLI all read the shared cross-runtime path:
 
 ```bash
-ln -s "$PWD" ~/.agents/skills/smart-brevity
+ln -s "$PWD/smart-brevity" ~/.agents/skills/smart-brevity
 ```
 
 Restart your agent session afterward so the skill is picked up.
@@ -50,12 +50,14 @@ By default the skill returns the polished communication itself, not an explanati
 ## Structure
 
 ```
-smart-brevity/
-├── SKILL.md                       # Core method, workflows, and guardrails
-└── references/
-    ├── review-checklist.md        # Pre-send audit, including an over-compression check
-    ├── templates.md               # Working structures per communication type
-    └── examples.md                # Before/after rewrites (original, fictional)
+smart-brevity-skill/               # This repository
+├── README.md
+└── smart-brevity/                 # The skill — symlink this directory
+    ├── SKILL.md                   # Core method, workflows, and guardrails
+    └── references/
+        ├── review-checklist.md    # Pre-send audit, including an over-compression check
+        ├── templates.md           # Working structures per communication type
+        └── examples.md            # Before/after rewrites (original, fictional)
 ```
 
 `SKILL.md` is the only file loaded on activation; the references are pulled in on demand.
